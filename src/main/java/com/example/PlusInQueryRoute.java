@@ -21,7 +21,7 @@ public class PlusInQueryRoute extends RouteBuilder {
 		rest()
 			.get("/test")
 				.route()
-					.setBody().simple("[${headers.foo}]")
+					.process(e -> {e.getIn().setBody(e.getIn().getHeader("foo") == null);})
 			.endRest();
 	}
 }
